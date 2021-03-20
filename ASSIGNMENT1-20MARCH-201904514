@@ -1,0 +1,67 @@
+// NAME-JAISMEET KAUR
+// STUDENT ID: 201904514
+//DATE SUBMITTED: 20-MARCH,2021
+// CLASS IN2203-G2 SECTION NUMBER
+//NAME OF WORK: ASSGNMENT 1 : THE GAMBLING GAME
+
+import java.util.*;
+
+public class Casino {
+
+    public int computerGuess;
+    public int playerGuess;
+    public int round = 1;
+    public static Random random = new Random();
+
+    public static void main(String[] args) {
+
+        Casino c = new Casino();
+        c.computerGuess();
+        while ((c.playerGuess != c.computerGuess) && c.round <= 5) {
+            System.out.println("--------GUESS NUMBER--------" + " " + c.round + "\n");
+            c.takeInput();
+            c.declareWinner();
+            c.round++;
+        }
+
+    }
+
+    public void declareWinner() {
+        if ((playerGuess < computerGuess) && round < 5) {
+            System.out.println("Make a higher guess!\n");
+        }
+        if (playerGuess > computerGuess && round < 5) {
+            System.out.println("Make a lower guess!\n");
+
+        }
+        if (round >= 5 && playerGuess != computerGuess) {
+            System.out.println("Guess limited exhausted. Game Over!");
+            System.out.println("The correct number was: "+computerGuess);
+
+        } else if (round <= 5 && computerGuess == playerGuess) {
+            System.out.println("Yeah! You guessed it in " + round + " attempts");
+
+        }
+
+    }
+
+    public void computerGuess() {
+        int randomInteger = random.nextInt(100);
+        computerGuess = randomInteger;
+
+    }
+
+    public void takeInput() {
+        Scanner userInput = new Scanner(System.in); // Create a Scanner object
+        System.out.println("Enter a number between 0 and 100\n");
+        int input = userInput.nextInt();
+        if (input >= 0 && input <= 100) {
+            playerGuess = input;
+
+        } else {
+            System.out.println("Number out of  range!");
+            System.exit(0); 
+        }
+
+    }
+}
